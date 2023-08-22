@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<Context>(options => options.UseNpgsql(connectionString));
 
-builder.Services.AddScoped<IRepository<Guest, Guid>, Repository<Guest, Guid>>();
+builder.Services.AddScoped<IGuestRepository, GuestRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

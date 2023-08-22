@@ -7,34 +7,37 @@ namespace StudiesAPI.Data.Repositories
 {
     public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : Entity<TKey>
     {
-        private readonly IContext _context;
-        private readonly DbSet<TEntity> _entity;
-        public IQueryable<TEntity> Entity => _entity;
-        
-        public Repository(IContext context)
+        private readonly Context _context;
+        public Repository(Context context)
         {
             _context = context;
-            _entity = _context.Set<TEntity>();
         }
         
-        public Task CreateAsync(TEntity entity)
+        public async Task CreateAsync(TEntity _entity)
         {
-            throw new NotImplementedException();
+            if(_entity is null)
+            {
+                throw new ArgumentNullException(nameof(_entity));
+            }
+
+            await _context.AddAsync(_entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(TEntity entity)
+        public async Task DeleteAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.Remove(entity); 
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await GetAllAsync();
         }
 
-        public Task<TEntity> GetAsync(TKey id)
+        public async Task<TEntity> GetAsync(TKey id)
         {
-            throw new NotImplementedException();
+            return await GetAsync(id);
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using StudiesAPI.Data.Configuration;
 using StudiesAPI.Data.Interfaces;
 using StudiesAPI.Entities;
 
 namespace StudiesAPI.Data
 {
-    public class Context : DbContext, IContext
+    public class Context : DbContext
     {
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -16,5 +18,7 @@ namespace StudiesAPI.Data
         {
             model.ApplyConfiguration(new GuestDbConfigs());
         }
+
+        DbSet<Guest> Guests { get; set; }
     }
 }
