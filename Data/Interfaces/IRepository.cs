@@ -1,4 +1,4 @@
-﻿using StudiesAPI.Entities;
+﻿using StudiesAPI.Domain.Entities;
 
 namespace StudiesAPI.Data.Interfaces
 {

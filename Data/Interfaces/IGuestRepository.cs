@@ -1,8 +1,8 @@
-﻿using StudiesAPI.Entities;
+﻿using StudiesAPI.Domain.Entities;
 
 namespace StudiesAPI.Data.Interfaces
 {
-    public interface IGuestRepository : IRepository<Guest, Guid>
+    public interface IGuestRepository : IRepository<Guest, int>
     {
     }
 }

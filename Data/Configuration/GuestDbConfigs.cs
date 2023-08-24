@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StudiesAPI.Entities;
+using StudiesAPI.Domain.Entities;
 
 namespace StudiesAPI.Data.Configuration
 {

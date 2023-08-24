@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using StudiesAPI.Data.Configuration;
 using StudiesAPI.Data.Interfaces;
-using StudiesAPI.Entities;
+using StudiesAPI.Domain.Entities;
 
 namespace StudiesAPI.Data
 {

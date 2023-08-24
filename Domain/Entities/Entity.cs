@@ -1,4 +1,4 @@
-﻿namespace StudiesAPI.Entities
+﻿namespace StudiesAPI.Domain.Entities
 {
     public class Entity<Tkey>
     {
