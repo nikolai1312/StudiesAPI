@@ -29,11 +29,19 @@ namespace StudiesAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(GenericDto id)
+        public async Task<IActionResult> GetByIdAsync([FromRoute]int id)
         {
-            var _response = await _guestService.GetGuestAsync(id);
+            GuestResponseDto _response = await _guestService.GetGuestAsync(id);
 
             return Ok(_response.Data);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetGuestsListAsync()
+        {
+            var _response = await _guestService.GetAllGuestsAsync();
+
+            return Ok(_response.DataList);
         }
     }
 }

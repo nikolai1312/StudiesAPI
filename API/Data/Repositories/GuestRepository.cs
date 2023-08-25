@@ -51,16 +51,17 @@ namespace StudiesAPI.Data.Repositories
             return _result;
         }
 
-        public async Task<Guest> GetAsync(int id)
+        public async Task<Guest> GetAsync(int Id)
         {
+
             string _sqlQuery = @$"
                     SELECT *
                     FROM Guests
-                    WHERE Id = {id}
+                    WHERE Id = { Id }
                 ";
 
-            var _result = await _connection.QueryAsync<Guest>(_sqlQuery, param: new { id });
-            return _result.FirstOrDefault()!;
+            var _result = await _connection.QueryFirstOrDefaultAsync<Guest>(_sqlQuery, param: new { Id });
+            return _result;
         }
     }
 }

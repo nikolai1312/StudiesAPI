@@ -47,10 +47,10 @@ namespace StudiesAPI.Logic.Services
             return _guestList;
         }
 
-        public async Task<GuestResponseDto> GetGuestAsync(GenericDto guestId)
+        public async Task<GuestResponseDto> GetGuestAsync(int guestId)
         {
             GuestResponseDto _response = new() { HasError = false };
-            Guest _result = await _guestRepository.GetAsync(guestId.Id);
+            var _result = await _guestRepository.GetAsync(guestId);
 
             _response.Data = _mapper.Map<GuestDto>(_result);
             return _response;

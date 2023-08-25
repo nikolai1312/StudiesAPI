@@ -8,6 +8,6 @@ namespace StudiesAPI.Logic.Interfaces
 
         Task<GuestResponseDto> GetAllGuestsAsync();
 
-        Task<GuestResponseDto> GetGuestAsync(GenericDto id);
+        Task<GuestResponseDto> GetGuestAsync(int id);
     }
 }

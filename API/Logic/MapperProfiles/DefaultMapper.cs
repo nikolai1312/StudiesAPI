@@ -8,7 +8,7 @@ namespace StudiesAPI.Logic.MapperProfiles
     {
         public DefaultMapper() {
             CreateMap<Guest, GuestDto> ().ReverseMap();
-            CreateMap<Entity<int>, GenericDto>();
+            CreateMap<Entity<int>, GenericDto>().ReverseMap();
         }
     }
 }
