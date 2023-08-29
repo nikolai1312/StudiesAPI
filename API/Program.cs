@@ -1,3 +1,4 @@
+using StudiesAPI.Data;
 using StudiesAPI.Data.Interfaces;
 using StudiesAPI.Data.Repositories;
 using StudiesAPI.Logic.Interfaces;
@@ -13,6 +14,10 @@ internal class Program
         builder.Services.AddAutoMapper(typeof(Program));
 
         builder.Services.AddControllers();
+
+        string connectionString = builder.Configuration.GetConnectionString("Default");
+
+        builder.Services.AddSingleton(new DapperDatabaseConnector(connectionString));
 
         builder.Services.AddScoped<IGuestRepository, GuestRepository>();
         builder.Services.AddScoped<IGuestService, GuestService>();

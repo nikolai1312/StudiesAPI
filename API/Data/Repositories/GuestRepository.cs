@@ -13,7 +13,7 @@ namespace StudiesAPI.Data.Repositories
         private readonly MySqlConnection _connection;
         public GuestRepository()
         {
-            _connection = new MySqlConnection("Server=localhost;Port=3306;Database=amigos-do-bem-db;Uid=root;Pwd=newbies2023;");
+            _connection = new MySqlConnection("server=localhost;user id=root;password=newbies2023;database=mariaDBStudies;");
             _connection.Open();
         }
 
