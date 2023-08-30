@@ -19,7 +19,7 @@ internal class Program
 
         builder.Services.AddSingleton(new DapperDatabaseConnector(connectionString));
 
-        builder.Services.AddScoped<IGuestRepository, GuestRepository>();
+        builder.Services.AddScoped<IBandRepository, BandRepository>();
         builder.Services.AddScoped<IGuestService, GuestService>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

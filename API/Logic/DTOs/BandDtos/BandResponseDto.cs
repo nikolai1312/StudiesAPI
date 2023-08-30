@@ -1,6 +1,6 @@
-﻿namespace StudiesAPI.Logic.DTOs
+﻿namespace StudiesAPI.Logic.DTOs.BandDtos
 {
-    public class GuestResponseDto
+    public class BandResponseDto
     {
         public bool HasError
         {
@@ -12,12 +12,12 @@
             get; set;
         }
 
-        public GuestDto? Data
+        public BandDto? Data
         {
             get; set;
         }
 
-        public IList<GuestDto>? DataList
+        public IList<BandDto>? DataList
         {
             get; set;
         }
