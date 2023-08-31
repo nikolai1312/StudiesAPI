@@ -4,97 +4,96 @@ using StudiesAPI.Data.Interfaces;
 using StudiesAPI.Domain.Entities;
 using StudiesAPI.Logic.DTOs.BandDtos;
 using StudiesAPI.Logic.Services;
-using System.Xml.Linq;
 
 namespace StudiesAPI.Tests.Services
 {
-    public class GuestServiceTest
+    public class BandServiceTest
     {
-        [Fact(DisplayName = "Should create a guest with name and document ID")]
-        public void ShouldCreateAGuestWithNameAndDocumentID()
+        [Fact(DisplayName = "Should create a band with name and genre")]
+        public void ShouldCreateABandWithNameAndGenre()
         {
             var _repository = new Mock<IBandRepository>();
             var _mapper = AutomapperTests.GenerateMapper();
-            var _service = new GuestService(_repository.Object, _mapper);
+            var _service = new BandService(_repository.Object, _mapper);
             
-            var _guestToBeCreated = new BandRequestDto { Name = "Chico Anysio", CPF = "11123498012" };
+            var _bandToBeCreated = new BandRequestDto { Name = "Metallica", Genre = "Metal" };
             var _responseService = new BandResponseDto { HasError = false };
 
-            var _testResult = _service.CreateGuestAsync(_guestToBeCreated);
+            var _testResult = _service.CreateBandAsync(_bandToBeCreated);
 
             _repository.Verify(x => x.CreateAsync(It.IsAny<Band>()), times: Times.Once());
             Assert.Equal(_responseService.HasError, _testResult.Result.HasError);
         }
 
-        [Fact(DisplayName = "Should return a guest")]
-        public void ShouldReturnAGuest()
+        [Fact(DisplayName = "Should return a band")]
+        public void ShouldReturnABand()
         {
             var _repository = new Mock<IBandRepository>();
             var _mapper = AutomapperTests.GenerateMapper();
-            var _service = new GuestService(_repository.Object, _mapper);
+            var _service = new BandService(_repository.Object, _mapper);
 
-            int _guestId = 1;
-            var _responseService = new BandResponseDto { HasError = false, Data = new BandDto{ Id = 2, Name = "Chico Anysio", CPF = "11122233390" } };
+            int _bandId = 1;
+            var _responseService = new BandResponseDto { HasError = false, Data = new BandDto{ Id = 2, Name = "Slayer", Genre = "Metal" } };
 
             _repository.Setup(x => x.GetAsync(It.IsAny<int>()).Result)
-                       .Returns(new Band { Id = 2, Name = "Chico Anysio", CPF = "11122233390"});
+                       .Returns(new Band { Id = 2, Name = "Slayer", Genre = "Metal" });
 
-            var _serviceResult = _service.GetGuestAsync(_guestId).Result;
+            var _serviceResult = _service.GetBandAsync(_bandId).Result;
 
             BandResponseDto _testResult = new() { HasError = false, Data = _serviceResult.Data };
             
             Assert.Equivalent(_responseService.Data, _testResult.Data);
         }
 
-        [Fact(DisplayName = "Should return guests list")]
-        public void ShouldReturnGuestsList()
+        [Fact(DisplayName = "Should return a list of bands")]
+        public void ShouldReturnAListOfBands()
         {
             var _repository = new Mock<IBandRepository>();
             var _mapper = AutomapperTests.GenerateMapper();
-            var _service = new GuestService(_repository.Object, _mapper);
+            var _service = new BandService(_repository.Object, _mapper);
 
             var _responseService = new BandResponseDto { HasError = false };
 
 
-            List<Band> _guestList = new() 
+            List<Band> _bandList = new() 
             { 
                 new Band 
                 { 
                     Id = 1, 
-                    CPF = "11122233390",
-                    Name = "Charles du bronx"
+                    Genre = "Metal",
+                    Name = "Ozzy osbourne"
                 },
                 new Band
                 {
                     Id = 2,
-                    CPF = "11122233390",
-                    Name = "Charles du bronx"
+                    Genre = "Metal",
+                    Name = "Exumer"
                 },
                 new Band
                 {
                     Id = 3,
-                    CPF = "11122233390",
-                    Name = "Charles du bronx"
+                    Genre = "Metal",
+                    Name = "Venom"
                 },
                 new Band
                 {
                     Id = 4,
-                    CPF = "11122233390",
-                    Name = "Charles du bronxw"
+                    Genre = "K-Pop",
+                    Name = "Twice"
                 }
             };
 
             _repository.Setup(x => x.GetAllAsync().Result)
-                       .Returns(_guestList);
+                       .Returns(_bandList);
 
-            var _serviceResult = _service.GetAllGuestsAsync().Result;
+            var _serviceResult = _service.GetAllBandsAsync().Result;
 
             BandResponseDto _testResult = new() { HasError = false, DataList = _serviceResult.DataList };
 
             _repository.Verify(x => x.GetAllAsync(), Times.Once());
 
-            Assert.Equal(_guestList.Count, _testResult.DataList.Count);
-            Assert.Equivalent(_guestList, _testResult.DataList);
+            Assert.Equal(_bandList.Count, _testResult.DataList.Count);
+            Assert.Equivalent(_bandList, _testResult.DataList);
         }
     }
 }

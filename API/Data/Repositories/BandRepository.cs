@@ -18,7 +18,7 @@ namespace StudiesAPI.Data.Repositories
 
         public async Task CreateAsync(Band entity)
         {
-                using(IDbConnection db = _connection.ConnectToDatabase())
+            using(IDbConnection db = _connection.ConnectToDatabase())
             {
                 var _transaction = db.BeginTransaction();
                 try
