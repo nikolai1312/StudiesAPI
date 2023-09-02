@@ -33,7 +33,7 @@ namespace StudiesAPI.Tests.Services
             var _service = new BandService(_repository.Object, _mapper);
 
             int _bandId = 1;
-            var _responseService = new BandResponseDto { HasError = false, Data = new BandDto{ Id = 2, Name = "Slayer", Genre = "Metal" } };
+            var _expectedResponse = new BandResponseDto { HasError = false, Data = new BandDto{ Id = 2, Name = "Slayer", Genre = "Metal" } };
 
             _repository.Setup(x => x.GetAsync(It.IsAny<int>()).Result)
                        .Returns(new Band { Id = 2, Name = "Slayer", Genre = "Metal" });
@@ -42,7 +42,7 @@ namespace StudiesAPI.Tests.Services
 
             BandResponseDto _testResult = new() { HasError = false, Data = _serviceResult.Data };
             
-            Assert.Equivalent(_responseService.Data, _testResult.Data);
+            Assert.Equivalent(_expectedResponse.Data, _testResult.Data);
         }
 
         [Fact(DisplayName = "Should return a list of bands")]
