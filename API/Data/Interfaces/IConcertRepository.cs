@@ -2,7 +2,7 @@
 
 namespace StudiesAPI.Data.Interfaces
 {
-    public interface IConcertRepository : IRepository<Concert, int>
+    public interface IConcertRepository : IRepository<Concert>
     {
     }
 }

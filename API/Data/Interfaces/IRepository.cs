@@ -2,9 +2,9 @@
 
 namespace StudiesAPI.Data.Interfaces
 {
-    public interface IRepository<TEntity, TKey> where TEntity : Entity<TKey>
+    public interface IRepository<TEntity> where TEntity : class
     {
-        Task<TEntity> GetAsync(TKey id);
+        Task<TEntity> GetAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task CreateAsync(TEntity entity);
         Task DeleteAsync(TEntity entity);

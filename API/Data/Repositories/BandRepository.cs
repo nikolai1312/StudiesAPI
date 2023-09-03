@@ -18,23 +18,22 @@ namespace StudiesAPI.Data.Repositories
 
         public async Task CreateAsync(Band entity)
         {
-            using(IDbConnection db = _connection.ConnectToDatabase())
+            _connection.ConnectToDatabase();
+            var _transaction = _connection.BeginTransaction();
+            try
             {
-                var _transaction = db.BeginTransaction();
-                try
-                {
-                    var _guest = new { Genre = entity.Genre, Name = entity.Name};
-                    string sqlQuery = @$"INSERT INTO Guests(name, genre)
-                                         VALUES(@Name, @Genre)";
-                   await db.ExecuteAsync(sqlQuery, param: _guest, _transaction);
-                    _transaction.Commit();
-                }
-                catch
-                {
-                    _transaction.Rollback();
-                    throw;
-                }
+                var _band = new { Genre = entity.Genre, Name = entity.Name };
+                string sqlQuery = @$"INSERT INTO Bands(name, genre)
+                                     VALUES(@Name, @Genre)";
+                await _connection.Connection.ExecuteAsync(sqlQuery, param: _band, _transaction);
+                _transaction.Commit();
             }
+            catch
+            {
+                _transaction.Rollback();
+                throw;
+            }
+            _connection.Dispose();
         }
 
         public async Task DeleteAsync(Band entity)
@@ -44,31 +43,28 @@ namespace StudiesAPI.Data.Repositories
 
         public async Task<IEnumerable<Band>> GetAllAsync()
         {
-            using (IDbConnection db = _connection.ConnectToDatabase())
-            { 
-                string _sqlQuery = @$"
-                        SELECT *
-                        FROM Guests
-                    ";
-
-                var _result = await db.QueryAsync<Band>(_sqlQuery);
-                return _result;
-            }
+            _connection.ConnectToDatabase();
+            string _sqlQuery = @$"
+                    SELECT *
+                    FROM Bands
+                ";
+            var _result = await _connection.Connection.QueryAsync<Band>(_sqlQuery);
+            _connection.Dispose();
+            return _result;
         }
 
         public async Task<Band> GetAsync(int Id)
         {
-            using (IDbConnection db = _connection.ConnectToDatabase())
-            { 
-                string _sqlQuery = @$"
-                        SELECT *
-                        FROM Guests
-                        WHERE Id = { Id }
-                    ";
+            _connection.ConnectToDatabase();
+            string _sqlQuery = @$"
+                    SELECT *
+                    FROM Bands
+                    WHERE Id = { Id }
+                ";
 
-                var _result = await db.QueryFirstOrDefaultAsync<Band>(_sqlQuery, param: new { Id });
-                return _result;
-            }
+            var _result = await _connection.Connection.QueryFirstOrDefaultAsync<Band>(_sqlQuery, param: new { Id });
+            _connection.Dispose();
+            return _result;
         }
     }
 }

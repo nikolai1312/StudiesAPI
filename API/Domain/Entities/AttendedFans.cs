@@ -1,8 +1,9 @@
 ﻿namespace StudiesAPI.Domain.Entities
 {
-    public class ConcertAttendedFans : Entity<int>
+    public class ConcertAttendedFans
     {
-       public int AttendedGuests { get; set; }
+        public int Id { get; set; }
+        public int AttendedGuests { get; set; }
        
     }
 }

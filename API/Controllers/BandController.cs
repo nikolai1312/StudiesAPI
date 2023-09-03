@@ -7,7 +7,7 @@ namespace StudiesAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BandController : Controller
+    public class BandController : ControllerBase
     {
         private readonly ILogger<BandController> _logger;
         private readonly IBandService _bandService;

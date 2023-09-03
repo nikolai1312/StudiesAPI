@@ -13,7 +13,6 @@ namespace StudiesAPI.Logic.MapperProfiles
             CreateMap<Band, BandRequestDto>().ReverseMap();
             CreateMap<Concert, ConcertDto>().ReverseMap();
             CreateMap<Concert, ConcertRequestDto>().ReverseMap();
-            CreateMap<Entity<int>, GenericDto>().ReverseMap();
         }
     }
 }
