@@ -5,13 +5,11 @@ namespace StudiesAPI.Data
 {
     public class DapperDatabaseConnector : IDapperDatabaseConnector
     {
-        private readonly string _connectionString;
         private MySqlConnection _connection;
 
-        public DapperDatabaseConnector(string connectionString)
+        public DapperDatabaseConnector(IConfiguration config)
         {
-            _connectionString = connectionString;
-            _connection = new MySqlConnection(connectionString);
+            _connection = new MySqlConnection(config.GetConnectionString("Default"));
         }
 
         public virtual IDbConnection Connection 
@@ -30,7 +28,7 @@ namespace StudiesAPI.Data
 
         public void ConnectToDatabase()
         {
-            if (_connection.State != ConnectionState.Open && _connection.State != ConnectionState.Connecting) 
+            if (_connection.State != ConnectionState.Open) 
             {
                 _connection.Open();    
             }

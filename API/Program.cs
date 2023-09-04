@@ -17,7 +17,7 @@ internal class Program
 
         string connectionString = builder.Configuration.GetConnectionString("Default");
 
-        builder.Services.AddSingleton<DapperDatabaseConnector>(new DapperDatabaseConnector(connectionString));
+        builder.Services.AddSingleton<DapperDatabaseConnector>();
 
         builder.Services.AddScoped<IBandRepository, BandRepository>();
         builder.Services.AddScoped<IConcertRepository, ConcertRepository>();

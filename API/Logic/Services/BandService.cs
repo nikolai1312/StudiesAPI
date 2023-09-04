@@ -26,10 +26,10 @@ namespace StudiesAPI.Logic.Services
             {
             await _repository.CreateAsync(_band);
             }
-            catch
+            catch (Exception ex)
             {
                 _response.HasError = true;
-                _response.Message = "Algo de errado aconteceu.";
+                _response.Message = ex.Message;
                 return _response;
             }
 

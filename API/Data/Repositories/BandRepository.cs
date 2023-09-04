@@ -11,10 +11,12 @@ namespace StudiesAPI.Data.Repositories
     public class BandRepository : IBandRepository
     {
         private readonly DapperDatabaseConnector _connection;
-        public BandRepository(DapperDatabaseConnector connectionString)
+
+        public BandRepository(DapperDatabaseConnector connection)
         {
-            _connection = connectionString;
+            _connection = connection;
         }
+
 
         public async Task CreateAsync(Band entity)
         {
@@ -59,7 +61,7 @@ namespace StudiesAPI.Data.Repositories
             string _sqlQuery = @$"
                     SELECT *
                     FROM Bands
-                    WHERE Id = { Id }
+                    WHERE Id = {Id}
                 ";
 
             var _result = await _connection.Connection.QueryFirstOrDefaultAsync<Band>(_sqlQuery, param: new { Id });
