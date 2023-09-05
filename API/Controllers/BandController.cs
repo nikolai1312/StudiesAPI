@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using StudiesAPI.Filters;
 using StudiesAPI.Logic.DTOs;
 using StudiesAPI.Logic.DTOs.BandDtos;
 using StudiesAPI.Logic.Interfaces;
@@ -19,6 +20,7 @@ namespace StudiesAPI.Controllers
         }
 
         [HttpPost]
+        [BandNameSanitizeFilter]
         public async Task<IActionResult> CreateBandAsync(BandRequestDto band)
         {
             var _response = await _bandService.CreateBandAsync(band);

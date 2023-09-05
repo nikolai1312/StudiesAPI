@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudiesAPI.Filters;
 using StudiesAPI.Logic.DTOs;
 using StudiesAPI.Logic.DTOs.ConcertDto;
 using StudiesAPI.Logic.Interfaces;
@@ -19,6 +20,7 @@ namespace StudiesAPI.Controllers
         }
 
         [HttpPost]
+        [ConcertNameSanitizeFilter]
         public async Task<IActionResult> CreateConcertAsync(ConcertRequestDto request)
         {
             var _response = await _concertService.CreateConcertAsync(request);
@@ -27,7 +29,7 @@ namespace StudiesAPI.Controllers
                 return BadRequest(new ErrorResponseDto { HasError = _response.HasError, Message = _response.Message });
             }
 
-            return Created("", "Object created");
+            return Created("", null);
         }
 
         [HttpGet("{id}")]
