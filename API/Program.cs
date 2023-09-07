@@ -21,9 +21,11 @@ internal class Program
 
         builder.Services.AddScoped<IBandRepository, BandRepository>();
         builder.Services.AddScoped<IConcertRepository, ConcertRepository>();
+        builder.Services.AddScoped<IAttendedFansRepository, AttendedFansRepository>();
 
         builder.Services.AddScoped<IBandService, BandService>();
         builder.Services.AddScoped<IConcertService, ConcertService>();
+        builder.Services.AddScoped<IAttendedFansService, AttendedFansService>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

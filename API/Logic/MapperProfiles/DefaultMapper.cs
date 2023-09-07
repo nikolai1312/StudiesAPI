@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using StudiesAPI.Domain.Entities;
 using StudiesAPI.Logic.DTOs;
+using StudiesAPI.Logic.DTOs.AttendedFansDto;
 using StudiesAPI.Logic.DTOs.BandDtos;
 using StudiesAPI.Logic.DTOs.ConcertDto;
 
@@ -13,6 +14,8 @@ namespace StudiesAPI.Logic.MapperProfiles
             CreateMap<Band, BandRequestDto>().ReverseMap();
             CreateMap<Concert, ConcertDto>().ReverseMap();
             CreateMap<Concert, ConcertRequestDto>().ReverseMap();
+            CreateMap<AttendedFans, AttendedFansDto>().ReverseMap();
+            CreateMap<AttendedFans, AttendedFansRequestDto>().ReverseMap();
         }
     }
 }

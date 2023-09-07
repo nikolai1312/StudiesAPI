@@ -17,7 +17,6 @@ namespace StudiesAPI.Data.Repositories
             _connection = connection;
         }
 
-
         public async Task CreateAsync(Band entity)
         {
             _connection.ConnectToDatabase();

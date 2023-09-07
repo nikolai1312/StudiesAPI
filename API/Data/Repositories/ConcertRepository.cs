@@ -60,6 +60,7 @@ namespace StudiesAPI.Data.Repositories
                     WHERE Id = {id}
                 ";
             var _result = await _connection.Connection.QueryFirstOrDefaultAsync<Concert>(_sqlQuery, param: new { id });
+            _connection.Dispose();
             return _result;
         }
     }

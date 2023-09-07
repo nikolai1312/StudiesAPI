@@ -1,10 +1,9 @@
-﻿namespace StudiesAPI.Domain.Entities
+﻿namespace StudiesAPI.Logic.DTOs.AttendedFansDto
 {
-    public class AttendedFans
+    public class AttendedFansDto
     {
         public int Id { get; set; }
         public int AttendedGuests { get; set; }
-       
         public int ConcertId { get; set; }
     }
 }

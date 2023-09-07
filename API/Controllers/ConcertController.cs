@@ -21,9 +21,9 @@ namespace StudiesAPI.Controllers
 
         [HttpPost]
         [ConcertNameSanitizeFilter]
-        public async Task<IActionResult> CreateConcertAsync(ConcertRequestDto request)
+        public async Task<IActionResult> CreateConcertAsync(ConcertRequestDto concert)
         {
-            var _response = await _concertService.CreateConcertAsync(request);
+            var _response = await _concertService.CreateConcertAsync(concert);
             if (_response.HasError)
             {
                 return BadRequest(new ErrorResponseDto { HasError = _response.HasError, Message = _response.Message });
